@@ -3,9 +3,15 @@ import { useState } from "react";
 
 interface SearchBoxProps {
     setPosition: (position: [number, number]) => void;
+    setZoom: (zoom: number) => void;
+    setMarkerPosition: (position: [number, number]) => void;
 }
 
-const SearchBox: React.FC<SearchBoxProps> = ({ setPosition }) => {
+const SearchBox: React.FC<SearchBoxProps> = ({
+    setPosition,
+    setZoom,
+    setMarkerPosition,
+}) => {
     const [query, setQuery] = useState("");
     const [isLoading, setIsLoading] = useState(false);
 
@@ -24,6 +30,11 @@ const SearchBox: React.FC<SearchBoxProps> = ({ setPosition }) => {
             const data = await response.json();
             if (data.length > 0) {
                 setPosition([parseFloat(data[0].lat), parseFloat(data[0].lon)]);
+                setZoom(12);
+                setMarkerPosition([
+                    parseFloat(data[0].lat),
+                    parseFloat(data[0].lon),
+                ]);
             } else {
                 alert("Không tìm thấy kết quả");
             }

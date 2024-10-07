@@ -1,22 +1,32 @@
 "use client";
 import React, { useState } from "react";
 import { MapContainer, Marker, ScaleControl, TileLayer } from "react-leaflet";
-import L from "leaflet";
 import "leaflet/dist/leaflet.css";
+import L from "leaflet";
 import SearchBox from "./SearchBox";
 import ChangeMapView from "./ChangeMapView";
 
+// Thêm đoạn mã này để định nghĩa biểu tượng mặc định
+
 const VietnamMap: React.FC = () => {
-    const [position, setPosition] = useState<[number, number]>([
-        21.0278, 105.8342,
+    const [position, setPosition] = useState<[number, number]>([15.7, 108.22]);
+    const [zoom, setZoom] = useState<number>(6);
+    const [markerPosition, setMarkerPosition] = useState<[number, number]>([
+        21.0285, 105.8542,
     ]);
+
+    console.log(zoom);
 
     return (
         <div className="h-screen flex flex-col">
-            <SearchBox setPosition={setPosition} />
+            <SearchBox
+                setPosition={setPosition}
+                setZoom={setZoom}
+                setMarkerPosition={setMarkerPosition}
+            />
             <MapContainer
                 center={position}
-                zoom={13}
+                zoom={zoom}
                 style={{ height: "100vh", width: "100%", zIndex: 30 }}
             >
                 <TileLayer
@@ -24,8 +34,9 @@ const VietnamMap: React.FC = () => {
                     maxZoom={19}
                     referrerPolicy="no-referrer"
                 />
+                {markerPosition && <Marker position={markerPosition} />}
                 <ScaleControl imperial metric position="bottomleft" />
-                <ChangeMapView position={position} />
+                <ChangeMapView position={position} zoom={zoom} />
             </MapContainer>
         </div>
     );
