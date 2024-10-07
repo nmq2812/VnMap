@@ -1,12 +1,36 @@
 "use client";
+import dynamic from "next/dynamic";
 import React, { useState } from "react";
-import { MapContainer, Marker, ScaleControl, TileLayer } from "react-leaflet";
-import "leaflet/dist/leaflet.css";
-import L from "leaflet";
-import SearchBox from "./SearchBox";
-import ChangeMapView from "./ChangeMapView";
 
-// Thêm đoạn mã này để định nghĩa biểu tượng mặc định
+import "leaflet/dist/leaflet.css";
+const SearchBox = dynamic(() => import("./SearchBox"), {
+    ssr: false,
+    loading: () => <p>Đang tải...</p>,
+});
+const ChangeMapView = dynamic(() => import("./ChangeMapView"), {
+    ssr: false,
+    loading: () => <p>Đang tải...</p>,
+});
+
+const MapContainer = dynamic(
+    () => import("react-leaflet").then((mod) => mod.MapContainer),
+    { ssr: false, loading: () => <p>Đang tải bản đồ...</p> },
+);
+
+const Marker = dynamic(
+    () => import("react-leaflet").then((mod) => mod.Marker),
+    { ssr: false },
+);
+
+const ScaleControl = dynamic(
+    () => import("react-leaflet").then((mod) => mod.ScaleControl),
+    { ssr: false },
+);
+
+const TileLayer = dynamic(
+    () => import("react-leaflet").then((mod) => mod.TileLayer),
+    { ssr: false },
+);
 
 const VietnamMap: React.FC = () => {
     const [position, setPosition] = useState<[number, number]>([15.7, 108.22]);

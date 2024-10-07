@@ -1,4 +1,3 @@
-"use server";
 import VietnamMap from "@/components/MainContent";
 
 export default async function Home() {
