@@ -1,10 +1,8 @@
-"use client"
-import SearchBar from './ui/search-bar'
-import React, { useState, useEffect } from 'react';
+"use client";
+import SearchBar from './ui/search-bar';
+import React, { useState } from 'react';
 import SearchResults from './ui/search-results';
-import { Order } from '@/app/admin/components/data/order'
-import { useRouter } from 'next/router';
-
+import { Order } from '@/app/admin/components/data/order';
 
 const data: Order[] = [
     {
@@ -17,12 +15,12 @@ const data: Order[] = [
         },
         items: [
             {
-            name: 'Product A',
-            price: 20,
-            quantity: 3,
-            office1: "Hà Nội",
-            hubs: ["Hà Nội hub", "Đà Nẵng hub"],
-            office2: "Dà Nẵng"
+                name: 'Product A',
+                price: 20,
+                quantity: 3,
+                office1: "Hà Nội",
+                hubs: ["Hà Nội hub", "Đà Nẵng hub"],
+                office2: "Đà Nẵng",
             }
         ],
         status: true,
@@ -38,26 +36,26 @@ const data: Order[] = [
         },
         items: [
             {
-            name: 'Product C',
-            price: 30,
-            quantity: 1,
-            office1: "Cần Thơ",
-            hubs: ["Cần Thơ hub", "Nam Định hub"],
-            office2: "Nam Định"
+                name: 'Product C',
+                price: 30,
+                quantity: 1,
+                office1: "Cần Thơ",
+                hubs: ["Cần Thơ hub", "Nam Định hub"],
+                office2: "Nam Định",
             },
         ],
         status: true,
         total: 30,
     },
-    // Thêm các đơn hàng khác ở đây nếu bạn cần
-  ];
+    // Additional orders can be added here
+];
 
 export default function Search() {
     const [filteredOrders, setFilteredOrders] = useState<Order[]>([]);
 
     const handleSearch = (searchTerm: string) => {
         if (searchTerm === '') {
-            setFilteredOrders([]);
+            setFilteredOrders([]); // Clear results when search term is empty
         } else {
             const foundOrders = data.filter(order =>
                 order.code.toLowerCase().includes(searchTerm.toLowerCase())
@@ -67,14 +65,21 @@ export default function Search() {
     };
 
     return (
-        
-        <div className="h-screen mx-auto grid place-items-center" id="search">
-            <div className="p-4 rounded-lg">
-                <h1 className="grid place-items-center text-3xl font-bold tracking-tight m-1">Tra cứu vận đơn</h1>
-                <SearchBar orders={data} onSearch={handleSearch} />
-                {filteredOrders.length > 0 && (
-                    <SearchResults results={filteredOrders}></SearchResults>
-                )}
+        <div className='pt-32 mt-20'> {/* Increased top padding and margin */}
+            <div className="h-screen flex items-center justify-center relative" id="search">
+                <div className="max-w-md w-full p-4 rounded-lg z-10 bg-white shadow-md">
+                    <h1 className="text-2xl font-bold text-center tracking-tight mb-4">Tra cứu vận đơn</h1>
+                    <SearchBar orders={data} onSearch={handleSearch} />
+                    
+                    {/* Results display directly below the search bar */}
+                    <div className="mt-4 w-full transition-all duration-300">
+                        {filteredOrders.length > 0 ? (
+                            <SearchResults results={filteredOrders} />
+                        ) : (
+                            <p className="text-gray-500 text-center">Không có kết quả nào.</p>
+                        )}
+                    </div>
+                </div>
             </div>
         </div>
     );
