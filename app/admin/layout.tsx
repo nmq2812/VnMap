@@ -1,17 +1,27 @@
 "use client";
 
-import { Brand } from "@/components/brand"
-import Link from "next/link"
-import { cn } from "@/lib/utils"
-import { ClipboardCheck, LogOut, Package, PieChart, Settings, Store, User, Users, Warehouse } from "lucide-react"
-import { SidebarNav } from "@/components/admin-nav"
+import { Brand } from "@/components/brand";
+import Link from "next/link";
+import { cn } from "@/lib/utils";
+import {
+    ClipboardCheck,
+    LogOut,
+    Package,
+    PieChart,
+    Settings,
+    Store,
+    User,
+    Users,
+    Warehouse,
+} from "lucide-react";
+import { SidebarNav } from "@/components/admin-nav";
 import { RedirectType, redirect } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Toaster } from "@/components/ui/toaster";
 import { useEffect, useState } from "react";
 
 interface AdminLayoutProps {
-    children: React.ReactNode
+    children: React.ReactNode;
 }
 
 export default function AdminLayout({ children }: AdminLayoutProps) {
@@ -20,59 +30,63 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
             title: "Thống kê",
             href: "/admin/statistics",
             icon: <PieChart strokeWidth={1} />,
-            allow: ["admin", "president"]
+            allow: ["admin", "president"],
         },
         {
             title: "Tạo đơn hàng",
             href: "/admin/item",
             icon: <Package strokeWidth={1} absoluteStrokeWidth />,
-            allow: ["admin", "office_staff"]
+            allow: ["admin", "office_staff"],
         },
         {
             title: "Quản lý đơn hàng",
             href: "/admin/order",
             icon: <ClipboardCheck strokeWidth={1} />,
-            allow: ["admin", "president", "hub_manager", "office_manager", "hub_staff", "office_staff"]
+            allow: [
+                "admin",
+                "president",
+                "hub_manager",
+                "office_manager",
+                "hub_staff",
+                "office_staff",
+            ],
         },
         {
             title: "Quản lý Nhân viên",
             href: "/admin/staff",
             icon: <Users strokeWidth={1} />,
-            allow: ["admin", "president", "hub_manager", "office_manager"]
+            allow: ["admin", "president", "hub_manager", "office_manager"],
         },
         {
             title: "Quản lý điểm tập kết",
             href: "/admin/hub",
             icon: <Warehouse strokeWidth={1} />,
-            allow: ["admin", "president"]
+            allow: ["admin", "president"],
         },
         {
             title: "Quản lý điểm giao dịch",
             href: "/admin/office",
             icon: <Store strokeWidth={1} />,
-            allow: ["admin", "president"]
+            allow: ["admin", "president"],
         },
-    ]
+    ];
 
-    const [user, setUser] = useState<{ username: string, role: string }>(
-        {
-            username: "",
-            role: "",
-        }
-    );
-    const [allowLinks, setAllowLinks] = useState<typeof navigationLinks>([]);
+    const [user, setUser] = useState<{ username: string; role: string }>({
+        username: "",
+        role: "",
+    });
+    const [allowLinks, setAllowLinks] =
+        useState<typeof navigationLinks>(navigationLinks);
 
-    useEffect(() => {
-        const temp = localStorage.getItem("userData");
-        if (!temp) redirect("/login");
-        const userData = JSON.parse(temp);
-        const allowLinks = navigationLinks.filter((link) => link.allow.includes(userData.role));
+    // useEffect(() => {
+    //     const temp = localStorage.getItem("userData");
+    //     if (!temp) redirect("/login");
+    //     const userData = JSON.parse(temp);
+    //     const allowLinks = navigationLinks.filter((link) => link.allow.includes(userData.role));
 
-        setUser(userData);
-        setAllowLinks(allowLinks);
-    }, [])
-
-
+    //     setUser(userData);
+    //     setAllowLinks(allowLinks);
+    // }, [])
 
     function logOut() {
         localStorage.setItem("userData", "");
@@ -100,33 +114,37 @@ export default function AdminLayout({ children }: AdminLayoutProps) {
 
                     <span className="flex-1"></span>
 
-                    <NavLink href="/login" >
+                    <NavLink href="/login">
                         <LogOut strokeWidth={1} />
                         <Button variant={"ghost"} onClick={() => logOut()}>
                             <p>Đăng xuất</p>
                         </Button>
                     </NavLink>
                 </div>
-            </aside >
+            </aside>
             <main className="w-5/6 h-full border shadow p-2 rounded-lg">
                 {children}
             </main>
-
-        </div >
-    )
+        </div>
+    );
 }
 
-
-function NavLink({ href, children }: { href: string, children: React.ReactNode }) {
+function NavLink({
+    href,
+    children,
+}: {
+    href: string;
+    children: React.ReactNode;
+}) {
     return (
         <Link
             href={href}
             className={cn(
                 "flex items-center gap-4 w-full p-2 py-4 hover:bg-muted rounded-lg",
-                "w-full"
+                "w-full",
             )}
         >
             {children}
         </Link>
-    )
+    );
 }

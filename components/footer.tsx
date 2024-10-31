@@ -1,25 +1,24 @@
-import { Brand } from "./brand"
+import { Brand } from "./brand";
 
 export function Footer() {
-
     const footerNavs = [
         {
-            href: 'javascript:void()',
-            name: 'Terms'
+            href: "javascript:void()",
+            name: "Terms",
         },
         {
-            href: 'javascript:void()',
-            name: 'License'
+            href: "javascript:void()",
+            name: "License",
         },
         {
-            href: 'javascript:void()',
-            name: 'Privacy'
+            href: "javascript:void()",
+            name: "Privacy",
         },
         {
-            href: 'javascript:void()',
-            name: 'About us'
-        }
-    ]
+            href: "javascript:void()",
+            name: "About us",
+        },
+    ];
 
     return (
         <footer className="pt-10">
@@ -37,7 +36,10 @@ export function Footer() {
                             144 Xuân Thủy, Dịch Vọng Hậu, Cầu Giấy, Hà nội.
                         </div>
                         <div className="flex items-center gap-3 mt-3 sm:block">
-                            Email: <a href="mailto:phuclaplace@gmail.com">phuclaplace@gmail.com</a>
+                            Email:{" "}
+                            <a href="mailto:nguyenminhquan341@gmail.com">
+                                nguyenminhquan341@gmail.com
+                            </a>
                         </div>
                         <div className="flex items-center gap-3 mt-3 sm:block">
                             Điện thoại: <a href="tel:0123456789">0123456789</a>
@@ -49,5 +51,5 @@ export function Footer() {
                 </div>
             </div>
         </footer>
-    )
+    );
 }
