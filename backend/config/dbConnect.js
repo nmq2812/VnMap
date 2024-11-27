@@ -2,7 +2,7 @@ const { default: mongoose } = require("mongoose");
 
 const dbConnect = () => {
     mongoose
-        .connect("mongodb://localhost:27017/", {
+        .connect("mongodb+srv://quangtu150503:w6CI7lRxbMGWxQWP@cluster0.wrdsykk.mongodb.net/magicpost?retryWrites=true&w=majority", {
             useNewUrlParser: true,
             useUnifiedTopology: true,
         })
