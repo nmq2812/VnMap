@@ -36,6 +36,6 @@ The easiest way to deploy your Next.js app is to use the [Vercel Platform](https
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
 
 ## For Express server
-- move to server folder
+- move to backend folder
 - open terminal, then run 'node index.js'
-- server run on localhost 8000
+- server run on localhost 4000
