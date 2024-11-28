@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
 import { Country, State } from "country-state-city";
-import { toast } from "react-toastify";
 
 import axios from "axios";
 const PostOfficeLookupPage = () => {
@@ -11,14 +10,13 @@ const PostOfficeLookupPage = () => {
     const [allPointInCity, setAllPointInCity] = useState();
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (city === "HN") {
-            await axios
-                .get("http://localhost:4000/api/point/city")
-                .then((res) => {
-                    console.log(res.data);
-                    setAllPointInCity(res.data);
-                });
-        }
+
+        await axios
+            .get(`http://localhost:4000/api/point/city/${city}`)
+            .then((res) => {
+                console.log(res.data);
+                setAllPointInCity(res.data);
+            });
     };
 
     return (
@@ -47,40 +45,6 @@ const PostOfficeLookupPage = () => {
                                 >
                                     <div className="w-full pb-2">
                                         <label className="block pb-2 text-gray-700 font-medium">
-                                            Quốc gia
-                                        </label>
-                                        <select
-                                            name=""
-                                            id=""
-                                            value={country}
-                                            onChange={(e) =>
-                                                setCountry(e.target.value)
-                                            }
-                                            className="w-[100%] border h-[40px] rounded-[5px]"
-                                        >
-                                            <option
-                                                value=""
-                                                className="block border pb-2 pl-2"
-                                            >
-                                                Chọn quốc gia
-                                            </option>
-                                            {Country &&
-                                                Country.getAllCountries().map(
-                                                    (item) => (
-                                                        <option
-                                                            className="block pb-2 ml-2"
-                                                            key={item.isoCode}
-                                                            value={item.isoCode}
-                                                        >
-                                                            {item.name}
-                                                        </option>
-                                                    ),
-                                                )}
-                                        </select>
-                                    </div>
-
-                                    <div className="w-full pb-2">
-                                        <label className="block pb-2 text-gray-700 font-medium">
                                             Tỉnh/Thành phố
                                         </label>
                                         <select
@@ -100,7 +64,7 @@ const PostOfficeLookupPage = () => {
                                             </option>
                                             {State &&
                                                 State.getStatesOfCountry(
-                                                    country,
+                                                    "VN",
                                                 ).map((item) => (
                                                     <option
                                                         className="block pb-2"

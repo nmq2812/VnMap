@@ -1,27 +1,93 @@
 [
     {
-        "pointName": "Bưu cục Hà Nội",
-        "pointAddress": "Số 123, Đường Láng, Quận Đống Đa, Hà Nội",
-        "pointProvince": "Hà Nội"
+        "pointName": "Bưu điện Bờ Hồ",
+        "pointAddress": "1 Đinh Tiên Hoàng, Hoàn Kiếm, Hà Nội",
+        "pointProvince": "HN",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
     },
     {
-        "pointName": "Bưu cục TP Hồ Chí Minh",
-        "pointAddress": "Số 456, Đường Cách Mạng Tháng 8, Quận 3, TP Hồ Chí Minh",
-        "pointProvince": "TP Hồ Chí Minh"
+        "pointName": "Bưu điện Ba Đình",
+        "pointAddress": "14 Điện Biên Phủ, Ba Đình, Hà Nội",
+        "pointProvince": "HN",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
     },
     {
-        "pointName": "Bưu cục Đà Nẵng",
-        "pointAddress": "Số 789, Đường Nguyễn Văn Linh, Quận Hải Châu, Đà Nẵng",
-        "pointProvince": "Đà Nẵng"
+        "pointName": "Điểm giao dịch Viettel Post Tây Hồ",
+        "pointAddress": "55 Nhật Chiêu, Tây Hồ, Hà Nội",
+        "pointProvince": "HN",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
     },
     {
-        "pointName": "Bưu cục Hải Phòng",
-        "pointAddress": "Số 321, Đường Tô Hiệu, Quận Lê Chân, Hải Phòng",
-        "pointProvince": "Hải Phòng"
+        "pointName": "Điểm giao dịch VNPT Cầu Giấy",
+        "pointAddress": "112 Trần Đăng Ninh, Cầu Giấy, Hà Nội",
+        "pointProvince": "HN",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
     },
     {
-        "pointName": "Bưu cục Cần Thơ",
-        "pointAddress": "Số 654, Đường 3 Tháng 2, Quận Ninh Kiều, Cần Thơ",
-        "pointProvince": "Cần Thơ"
+        "pointName": "Bưu điện Từ Liêm",
+        "pointAddress": "35 Hồ Tùng Mậu, Nam Từ Liêm, Hà Nội",
+        "pointProvince": "HN",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Điểm giao dịch VNPT Thanh Xuân",
+        "pointAddress": "98 Nguyễn Trãi, Thanh Xuân, Hà Nội",
+        "pointProvince": "HN",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Bưu điện Gò Vấp",
+        "pointAddress": "2 Nguyễn Oanh, Gò Vấp, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Điểm giao dịch Viettel Post Tân Phú",
+        "pointAddress": "15 Âu Cơ, Tân Phú, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Điểm giao dịch VNPT Bình Thạnh",
+        "pointAddress": "100 Xô Viết Nghệ Tĩnh, Bình Thạnh, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Bưu điện Phú Nhuận",
+        "pointAddress": "32 Phan Đình Phùng, Phú Nhuận, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Điểm giao dịch Viettel Post Quận 10",
+        "pointAddress": "56 Thành Thái, Quận 10, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Điểm giao dịch VNPT Thủ Đức",
+        "pointAddress": "202 Võ Văn Ngân, Thủ Đức, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
+    },
+    {
+        "pointName": "Bưu điện Chợ Lớn",
+        "pointAddress": "10 Hồng Bàng, Quận 5, TP Hồ Chí Minh",
+        "pointProvince": "SG",
+        "createdAt": "2024-11-28T12:00:00Z",
+        "updatedAt": "2024-11-28T12:00:00Z"
     }
 ]

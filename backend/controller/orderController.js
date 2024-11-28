@@ -33,15 +33,16 @@ const getOrder = asyncHandler(async (req, res) => {
 
 const getAllOrderInPoint = asyncHandler(async (req, res) => {
     const { _id, postOfficeId } = req.user;
-    console.log(req.user);
+
     validateMongoDbId(_id);
     try {
-        console.log(_id, postOfficeId);
         const findPoint = await Point.findOne({ _id: postOfficeId });
-        console.log(findPoint);
+        console.log(`find point: ${findPoint}`);
+
         const getAllOrderInPoint = await Order.find({
-            orderLocation: findPoint.pointAddress,
+            orderLocation: findPoint.pointName,
         });
+        console.log(getAllOrderInPoint);
         res.json(getAllOrderInPoint);
     } catch (error) {
         throw new Error(error);
@@ -102,7 +103,7 @@ const updateOrder = asyncHandler(async (req, res, next) => {
             id,
             {
                 ...req.body,
-                orderLocation: findPoint.pointAddress,
+                orderLocation: findPoint.pointName,
             },
             {
                 new: true,
