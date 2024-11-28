@@ -24,7 +24,7 @@ var userSchema = new mongoose.Schema(
         },
         role: {
             type: String,
-            default: "admin",
+            default: "null",
             enum: [
                 "gathering point leader",
                 "head of transaction point",

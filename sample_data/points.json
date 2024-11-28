@@ -1,0 +1,27 @@
+[
+    {
+        "pointName": "Bưu cục Hà Nội",
+        "pointAddress": "Số 123, Đường Láng, Quận Đống Đa, Hà Nội",
+        "pointProvince": "Hà Nội"
+    },
+    {
+        "pointName": "Bưu cục TP Hồ Chí Minh",
+        "pointAddress": "Số 456, Đường Cách Mạng Tháng 8, Quận 3, TP Hồ Chí Minh",
+        "pointProvince": "TP Hồ Chí Minh"
+    },
+    {
+        "pointName": "Bưu cục Đà Nẵng",
+        "pointAddress": "Số 789, Đường Nguyễn Văn Linh, Quận Hải Châu, Đà Nẵng",
+        "pointProvince": "Đà Nẵng"
+    },
+    {
+        "pointName": "Bưu cục Hải Phòng",
+        "pointAddress": "Số 321, Đường Tô Hiệu, Quận Lê Chân, Hải Phòng",
+        "pointProvince": "Hải Phòng"
+    },
+    {
+        "pointName": "Bưu cục Cần Thơ",
+        "pointAddress": "Số 654, Đường 3 Tháng 2, Quận Ninh Kiều, Cần Thơ",
+        "pointProvince": "Cần Thơ"
+    }
+]

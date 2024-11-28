@@ -29,6 +29,7 @@ const OrderStatsPage = () => {
                 .then((res) => {
                     setAllOrder(res.data);
                     toast.success("Lấy dữ liệu thành công!!");
+                    console.log(res.data);
                 })
                 .catch((err) => {
                     setAllOrder([]);

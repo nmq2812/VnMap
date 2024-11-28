@@ -23,6 +23,7 @@ import {
 } from "../Constants/userContants";
 import { ORDER_LIST_MY_RESET } from "../Constants/orderContants";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 // LOGIN
 export const login = (email, password) => async (dispatch) => {
@@ -41,6 +42,8 @@ export const login = (email, password) => async (dispatch) => {
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
         toast.success("Đăng nhập thành công!!");
         localStorage.setItem("userInfo", JSON.stringify(data));
+        const navigate = useNavigate();
+        navigate(-1);
     } catch (error) {
         dispatch({
             type: USER_LOGIN_FAIL,

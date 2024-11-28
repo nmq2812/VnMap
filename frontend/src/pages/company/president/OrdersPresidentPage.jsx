@@ -7,7 +7,6 @@ import { toast } from "react-toastify";
 import axios from "axios";
 const OrdersPresidentPage = () => {
     const [id, setId] = useState();
-    console.log(id);
     const [point, setPoint] = useState([]);
     const [allOrder, setAllOrder] = useState([]);
 
@@ -32,6 +31,8 @@ const OrdersPresidentPage = () => {
             )
             .then((res) => {
                 setAllOrder(res.data);
+                console.log(id);
+                console.log(res.data);
                 toast.success("Lấy dữ liệu thành công!!");
             })
             .catch((err) => {

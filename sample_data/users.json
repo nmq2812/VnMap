@@ -1,0 +1,62 @@
+[
+    {
+        "userName": "Nguyễn Văn A",
+        "email": "nguyenvana@example.com",
+        "password": "hashed_password_123",
+        "phone": "0987654321",
+        "role": "admin",
+        "address": "Số 123, Đường ABC, Hà Nội",
+        "postOfficeId": "649b0f25f2d3a4567890abc1",
+        "passwordChangeAt": "2023-11-01T08:00:00Z",
+        "passwordResetToken": null,
+        "passwordResetExpires": null
+    },
+    {
+        "userName": "Trần Thị B",
+        "email": "tranthib@example.com",
+        "password": "hashed_password_456",
+        "phone": "0912345678",
+        "role": "gathering point leader",
+        "address": "Số 456, Đường DEF, TP Hồ Chí Minh",
+        "postOfficeId": "649b0f25f2d3a4567890abc2",
+        "passwordChangeAt": null,
+        "passwordResetToken": null,
+        "passwordResetExpires": null
+    },
+    {
+        "userName": "Phạm Quốc C",
+        "email": "phamquocc@example.com",
+        "password": "hashed_password_789",
+        "phone": "0908765432",
+        "role": "head of transaction point",
+        "address": "Số 789, Đường GHI, Đà Nẵng",
+        "postOfficeId": "649b0f25f2d3a4567890abc3",
+        "passwordChangeAt": "2023-10-15T10:00:00Z",
+        "passwordResetToken": "reset_token_123",
+        "passwordResetExpires": "2023-11-30T10:00:00Z"
+    },
+    {
+        "userName": "Hoàng Văn D",
+        "email": "hoangvand@example.com",
+        "password": "hashed_password_101",
+        "phone": "0936543210",
+        "role": "assembly point staff",
+        "address": "Số 321, Đường JKL, Hải Phòng",
+        "postOfficeId": "649b0f25f2d3a4567890abc4",
+        "passwordChangeAt": null,
+        "passwordResetToken": "reset_token_456",
+        "passwordResetExpires": "2023-12-15T15:00:00Z"
+    },
+    {
+        "userName": "Lê Thị E",
+        "email": "lethie@example.com",
+        "password": "hashed_password_202",
+        "phone": "0965432187",
+        "role": "transaction point staff",
+        "address": "Số 654, Đường MNO, Cần Thơ",
+        "postOfficeId": "649b0f25f2d3a4567890abc5",
+        "passwordChangeAt": "2023-11-10T12:00:00Z",
+        "passwordResetToken": null,
+        "passwordResetExpires": null
+    }
+]
