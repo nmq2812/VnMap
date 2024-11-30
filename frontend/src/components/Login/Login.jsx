@@ -28,13 +28,16 @@ const Login = () => {
             ) {
                 navigate("/pointleader/thong-ke-hang");
             } else if (userInfo.role === "admin") {
-                navigate("/president/thong-ke-hang");
+                navigate("/president/he-thong-diem");
             }
         }
     }, [userInfo, navigate]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        dispatch(login(email, password));
+        const handleLogin = dispatch(login(email, password));
+        if (handleLogin) {
+            navigate("/");
+        }
     };
     return (
         <div className="h-screen flex justify-center ">

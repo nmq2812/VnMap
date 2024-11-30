@@ -6,13 +6,16 @@ import axios from "axios";
 
 // Function to fetch coordinates for a location using the Nominatim API
 async function fetchCoordinates(location) {
-    const response = await fetch(`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(location)}&format=json&addressdetails=1`);
+    const response = await fetch(
+        `https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+            location,
+        )}&format=json&addressdetails=1`,
+    );
     const data = await response.json();
     return data.length > 0 ? { lat: data[0].lat, lon: data[0].lon } : null;
 }
 
 const PostOfficeLookupPage = () => {
-    const [country, setCountry] = useState("");
     const [city, setCity] = useState("");
     const [allPointInCity, setAllPointInCity] = useState([]);
     const [currentLocation, setCurrentLocation] = useState(null);
@@ -30,10 +33,10 @@ const PostOfficeLookupPage = () => {
                 },
                 (error) => {
                     console.error("Error getting current location", error);
-                }
+                },
             );
         }
-    }, []);
+    }, [currentLocation]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,7 +52,9 @@ const PostOfficeLookupPage = () => {
                     const postOfficeAddress = res.data[0].pointAddress;
 
                     // Fetch destination coordinates (post office)
-                    const destinationCoords = await fetchCoordinates(postOfficeAddress);
+                    const destinationCoords = await fetchCoordinates(
+                        postOfficeAddress,
+                    );
 
                     if (currentLocation && destinationCoords) {
                         // Generate route link
@@ -58,6 +63,14 @@ const PostOfficeLookupPage = () => {
                     }
                 }
             });
+    };
+
+    const handleSearchCoords = (pointItem) => {
+        window.open(
+            `https://nominatim.openstreetmap.org/search?q=${pointItem.pointAddress}`,
+            "_blank",
+            "width=800,height=600,scrollbars=yes,resizable=yes",
+        );
     };
 
     return (
@@ -80,7 +93,10 @@ const PostOfficeLookupPage = () => {
                     <section className="bg-white">
                         <div className="max-w-screen-md px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:pb-24 lg:pt-10 lg:px-6">
                             <div className="w-[100%] p-[20px] bg-white shadow-[2px_10px_25px_5px_rgba(0,0,0,0.1)] mb-[30px] rounded-lg">
-                                <form onSubmit={handleSubmit} className="w-full">
+                                <form
+                                    onSubmit={handleSubmit}
+                                    className="w-full"
+                                >
                                     <div className="w-full pb-2">
                                         <label className="block pb-2 text-gray-700 font-medium">
                                             Tỉnh/Thành phố
@@ -89,15 +105,24 @@ const PostOfficeLookupPage = () => {
                                             name=""
                                             id=""
                                             value={city}
-                                            onChange={(e) => setCity(e.target.value)}
+                                            onChange={(e) =>
+                                                setCity(e.target.value)
+                                            }
                                             className="w-[100%] border h-[40px] rounded-[5px]"
                                         >
-                                            <option value="">Chọn Tỉnh/TP</option>
-                                            {State.getStatesOfCountry("VN").map((item) => (
-                                                <option key={item.isoCode} value={item.isoCode}>
-                                                    {item.name}
-                                                </option>
-                                            ))}
+                                            <option value="">
+                                                Chọn Tỉnh/TP
+                                            </option>
+                                            {State.getStatesOfCountry("VN").map(
+                                                (item) => (
+                                                    <option
+                                                        key={item.isoCode}
+                                                        value={item.isoCode}
+                                                    >
+                                                        {item.name}
+                                                    </option>
+                                                ),
+                                            )}
                                         </select>
                                     </div>
 
@@ -121,7 +146,13 @@ const PostOfficeLookupPage = () => {
 
                                 {allPointInCity &&
                                     allPointInCity.map((pointItem) => (
-                                        <div key={pointItem._id} className="overflow-auto max-h-[624px]">
+                                        <div
+                                            key={pointItem._id}
+                                            className="overflow-auto max-h-[624px]"
+                                            onClick={handleSearchCoords(
+                                                pointItem,
+                                            )}
+                                        >
                                             <div className="p-[21px] bg-[#fff] border-b-[1px] solid border-b-[#0054a6] cursor-pointer">
                                                 <div className="flex items-center mb-[10px]">
                                                     <h3 className="font-[500] text-[18px] leading-[24px] mb-0 ml-2">
@@ -132,7 +163,6 @@ const PostOfficeLookupPage = () => {
                                                     <p className="leading-[21px] text-[#313131] mb-[5px]">
                                                         {pointItem.pointAddress}
                                                     </p>
-                                                    <p>{pointItem.pointProvince}</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -146,7 +176,8 @@ const PostOfficeLookupPage = () => {
                                             rel="noopener noreferrer"
                                             className="text-blue-500 underline"
                                         >
-                                            Xem đường đi từ vị trí hiện tại đến bưu cục
+                                            Xem đường đi từ vị trí hiện tại đến
+                                            bưu cục
                                         </a>
                                     </div>
                                 )}

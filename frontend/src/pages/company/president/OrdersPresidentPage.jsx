@@ -159,10 +159,10 @@ const OrdersPresidentPage = () => {
                                                     {orderItem._id}
                                                 </td>
                                                 <td class="px-6 py-4 border border-dashed border-[#ddd]">
-                                                    {orderItem.orderStatus}
+                                                    {orderItem.productName}
                                                 </td>
                                                 <td class="px-6 py-4 border border-dashed border-[#ddd]">
-                                                    {orderItem.productName}
+                                                    {orderItem.orderStatus}
                                                 </td>
                                                 <td class="px-6 py-4 border border-dashed border-[#ddd]">
                                                     {orderItem.senderName}
@@ -171,11 +171,15 @@ const OrdersPresidentPage = () => {
                                                     {orderItem.recipientName}
                                                 </td>
                                                 <td class="px-6 py-4 border border-dashed border-[#ddd]">
-                                                    {orderItem.productPrice}
+                                                    {orderItem.productPrice.toLocaleString(
+                                                        "vi-VN",
+                                                    )}
                                                     {" đ"}
                                                 </td>
                                                 <td class="px-6 py-4 border border-dashed border-[#ddd]">
-                                                    {orderItem.shippingFee}
+                                                    {orderItem.shippingFee.toLocaleString(
+                                                        "vi-VN",
+                                                    )}
                                                     {" đ"}
                                                 </td>
                                             </tr>

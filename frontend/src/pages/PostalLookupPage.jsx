@@ -7,15 +7,20 @@ import axios from "axios";
 
 // Function to fetch coordinates from the API
 async function fetchCoordinates(location) {
-  const response = await fetch(`https://tmdt.fimo.edu.vn/nominatim/search?q=${encodeURIComponent(location)}`);
-  const data = await response.json();
-  return data.length > 0 ? { lat: data[0].lat, lon: data[0].lon } : null;
+    const response = await fetch(
+        `https://tmdt.fimo.edu.vn/nominatim/search?q=${encodeURIComponent(
+            //`https://nominatim.openstreetmap.org/search?q=${encodeURIComponent(
+            location,
+        )}`, //&format=json&addressdetails=1
+    );
+    const data = await response.json();
+    return data.length > 0 ? { lat: data[0].lat, lon: data[0].lon } : null;
 }
 
 const PostalLookupPage = () => {
     const [searchOrder, setSearchOrder] = useState("");
     const [infoOrder, setInfoOrder] = useState(null);
-    const [routeLink, setRouteLink] = useState("");
+    const [routeLink, setRouteLink] = useState(null);
 
     useEffect(() => {
         if (infoOrder) {
@@ -24,17 +29,22 @@ const PostalLookupPage = () => {
                 const recipientLocation = infoOrder[0].recipientAddress;
 
                 const senderCoords = await fetchCoordinates(senderLocation);
-                const recipientCoords = await fetchCoordinates(recipientLocation);
+                const recipientCoords = await fetchCoordinates(
+                    recipientLocation,
+                );
+                console.log(senderCoords, recipientCoords);
 
                 if (senderCoords && recipientCoords) {
-                    const link = `https://tmdt.fimo.edu.vn/maps/?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck&layer=OpenStreetMap`;
+                    //const link = `https://tmdt.fimo.edu.vn/maps/route?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck&layer=OpenStreetMap`;
+                    const link = `https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=${senderCoords.lat}%2C${senderCoords.lon}%3B${recipientCoords.lat}%2C${recipientCoords.lon}`;
+
                     setRouteLink(link);
                 }
             };
 
             fetchRouteLink();
         }
-    }, [infoOrder]);
+    }, [infoOrder, searchOrder]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -85,7 +95,11 @@ const PostalLookupPage = () => {
                                                 <input
                                                     type="text"
                                                     value={searchOrder}
-                                                    onChange={(e) => setSearchOrder(e.target.value)}
+                                                    onChange={(e) =>
+                                                        setSearchOrder(
+                                                            e.target.value,
+                                                        )
+                                                    }
                                                     placeholder="Nhập mã bưu gửi"
                                                     className="w-full border solid border-[#edecec] rounded py-[13px] px-[20px]"
                                                 />
@@ -135,7 +149,10 @@ const PostalLookupPage = () => {
                                                 <span className="font-[700] text-[16px] leading-[27px] text-[#313131] ml-5">
                                                     {infoOrder[0].senderAddress}
                                                     {" - "}
-                                                    {infoOrder[0].senderProvince}
+                                                    {
+                                                        infoOrder[0]
+                                                            .senderProvince
+                                                    }
                                                 </span>
                                             </div>
                                         </div>
@@ -155,9 +172,15 @@ const PostalLookupPage = () => {
                                             <div>
                                                 Địa chỉ nhận:{" "}
                                                 <span className="font-[700] text-[16px] leading-[27px] text-[#313131] ml-5">
-                                                    {infoOrder[0].recipientAddress}
+                                                    {
+                                                        infoOrder[0]
+                                                            .recipientAddress
+                                                    }
                                                     {" - "}
-                                                    {infoOrder[0].recipientProvince}
+                                                    {
+                                                        infoOrder[0]
+                                                            .recipientProvince
+                                                    }
                                                 </span>
                                             </div>
                                         </div>
@@ -168,8 +191,10 @@ const PostalLookupPage = () => {
                                             <div>
                                                 Cập nhật:{" "}
                                                 <span className="font-[700] text-[16x] leading-[27px] text-[#313131] ml-5">
-                                                    {moment(infoOrder[0].updatedAt).format(
-                                                        "DD/MM/YYYY HH:mm:ss"
+                                                    {moment(
+                                                        infoOrder[0].updatedAt,
+                                                    ).format(
+                                                        "DD/MM/YYYY HH:mm:ss",
                                                     )}
                                                 </span>
                                             </div>
@@ -179,7 +204,11 @@ const PostalLookupPage = () => {
                                     <div className="px-[23px] py-[24px] bg-[#fafafa]">
                                         <div>
                                             {routeLink ? (
-                                                <a href={routeLink} target="_blank" rel="noopener noreferrer">
+                                                <a
+                                                    href={routeLink}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
+                                                >
                                                     Xem lộ trình đường đi
                                                 </a>
                                             ) : (
