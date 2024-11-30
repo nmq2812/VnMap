@@ -1,18 +1,43 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Header from "../components/Layout/Header";
 import Footer from "../components/Layout/Footer";
-
 import moment from "moment";
 import { toast } from "react-toastify";
 import axios from "axios";
+
+// Function to fetch coordinates from the API
+async function fetchCoordinates(location) {
+  const response = await fetch(`https://tmdt.fimo.edu.vn/nominatim/search?q=${encodeURIComponent(location)}`);
+  const data = await response.json();
+  return data.length > 0 ? { lat: data[0].lat, lon: data[0].lon } : null;
+}
+
 const PostalLookupPage = () => {
     const [searchOrder, setSearchOrder] = useState("");
-    const [infoOrder, setInfoOrder] = useState();
-    console.log(infoOrder);
+    const [infoOrder, setInfoOrder] = useState(null);
+    const [routeLink, setRouteLink] = useState("");
+
+    useEffect(() => {
+        if (infoOrder) {
+            const fetchRouteLink = async () => {
+                const senderLocation = infoOrder[0].senderAddress;
+                const recipientLocation = infoOrder[0].recipientAddress;
+
+                const senderCoords = await fetchCoordinates(senderLocation);
+                const recipientCoords = await fetchCoordinates(recipientLocation);
+
+                if (senderCoords && recipientCoords) {
+                    const link = `https://tmdt.fimo.edu.vn/maps/?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck&layer=OpenStreetMap`;
+                    setRouteLink(link);
+                }
+            };
+
+            fetchRouteLink();
+        }
+    }, [infoOrder]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(123);
         await axios
             .get(`http://localhost:4000/api/order/${searchOrder}`)
             .then((res) => {
@@ -24,6 +49,7 @@ const PostalLookupPage = () => {
                 console.log(err);
             });
     };
+
     return (
         <div>
             <Header />
@@ -41,9 +67,9 @@ const PostalLookupPage = () => {
                             TRA CỨU BƯU GỬI
                         </span>
                     </div>
-                    <section class="bg-white">
-                        <div class="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:pb-24 lg:pt-8 lg:px-6">
-                            <div class="shadow-[2px_10px_25px_5px_rgba(0,0,0,0.1)] p-[40px] rounded-lg">
+                    <section className="bg-white">
+                        <div className="max-w-screen-xl px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:pb-24 lg:pt-8 lg:px-6">
+                            <div className="shadow-[2px_10px_25px_5px_rgba(0,0,0,0.1)] p-[40px] rounded-lg">
                                 <div className="mb-[18px] text-[16px] flex leading-6">
                                     <img
                                         className="w-[32px] h-[32px] mr-[10px]"
@@ -59,11 +85,7 @@ const PostalLookupPage = () => {
                                                 <input
                                                     type="text"
                                                     value={searchOrder}
-                                                    onChange={(e) =>
-                                                        setSearchOrder(
-                                                            e.target.value,
-                                                        )
-                                                    }
+                                                    onChange={(e) => setSearchOrder(e.target.value)}
                                                     placeholder="Nhập mã bưu gửi"
                                                     className="w-full border solid border-[#edecec] rounded py-[13px] px-[20px]"
                                                 />
@@ -90,7 +112,7 @@ const PostalLookupPage = () => {
                     </section>
                     {infoOrder && (
                         <section className="bg-white">
-                            <div class="max-w-screen-lg px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:pb-24 lg:pt-8 lg:px-6">
+                            <div className="max-w-screen-lg px-4 py-8 mx-auto space-y-12 lg:space-y-20 lg:pb-24 lg:pt-8 lg:px-6">
                                 <div className="mb-[70px]">
                                     <div className="mb-[35px]">
                                         <h3 className="font-[700] text-[20px] leading-6 text-[#0072bc]">
@@ -113,10 +135,7 @@ const PostalLookupPage = () => {
                                                 <span className="font-[700] text-[16px] leading-[27px] text-[#313131] ml-5">
                                                     {infoOrder[0].senderAddress}
                                                     {" - "}
-                                                    {
-                                                        infoOrder[0]
-                                                            .senderProvince
-                                                    }
+                                                    {infoOrder[0].senderProvince}
                                                 </span>
                                             </div>
                                         </div>
@@ -136,167 +155,37 @@ const PostalLookupPage = () => {
                                             <div>
                                                 Địa chỉ nhận:{" "}
                                                 <span className="font-[700] text-[16px] leading-[27px] text-[#313131] ml-5">
-                                                    {
-                                                        infoOrder[0]
-                                                            .recipientAddress
-                                                    }
+                                                    {infoOrder[0].recipientAddress}
                                                     {" - "}
-                                                    {
-                                                        infoOrder[0]
-                                                            .recipientProvince
-                                                    }
+                                                    {infoOrder[0].recipientProvince}
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
 
                                     <div className="px-[23px] py-[24px] bg-[#fafafa]">
-                                        <div className="text-[16px] leading-[21px] text-[#313131] px-[15px]">
+                                        <div className="text-[16px] leading-[21px] text-[#313131] px-[15px] basis-[100%] shrink-0 md:basis-1/3 grow-0 md:max-w-[33.333%]">
                                             <div>
-                                                Trạng thái:{" "}
+                                                Cập nhật:{" "}
                                                 <span className="font-[700] text-[16x] leading-[27px] text-[#313131] ml-5">
-                                                    {infoOrder[0].orderStatus}
+                                                    {moment(infoOrder[0].updatedAt).format(
+                                                        "DD/MM/YYYY HH:mm:ss"
+                                                    )}
                                                 </span>
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="block w-full overflow-x-auto">
-                                        <table class="table w-full border-collapse rounded-md text-center mr-[3px] mb-4">
-                                            <thead className="bg-[#0072bc]">
-                                                <tr>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Số hiệu bưu gửi
-                                                    </th>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Khối lượng (gram)
-                                                    </th>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Nơi gửi
-                                                    </th>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Nơi nhận
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {infoOrder[0]._id}
-                                                    </td>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {
-                                                            infoOrder[0]
-                                                                .productWeight
-                                                        }
-                                                    </td>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {
-                                                            infoOrder[0]
-                                                                .senderAddress
-                                                        }
-                                                    </td>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {
-                                                            infoOrder[0]
-                                                                .recipientAddress
-                                                        }
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    {/* <div className="bg-[#0072bc] rounded-t-lg px-[26px] py-[30px] flex flex-wrap ">
-                  <div className="border-r-[1px] solid border-r-[#fff] px-[2px] md:px-[5px] lg:px-[15px]">
-                    <div className="text-[#fff] text-[14px] leading-[21px]">
-                      Số hiệu bưu gửi
-                    </div>
-                    <p className="font-[700] text-[18px] leading-[27px] text-[#fff] mb-0 text-ellipsis">
-                      EU103280832VN
-                    </p>
-                  </div>
 
-                  <div className="border-r-[1px] solid border-r-[#fff] px-[33px]">
-                    <div className="text-[#fff] text-[14px] leading-[21px]">
-                      Khối lượng (gram)
-                    </div>
-                    <p className="font-[700] text-[18px] leading-[27px] text-[#fff] mb-0 text-ellipsis">
-                      30
-                    </p>
-                  </div>
-
-                  <div className="border-r-[1px] solid border-r-[#fff] px-[58px]">
-                    <div className="text-[#fff] text-[14px] leading-[21px]">
-                      Nơi gửi
-                    </div>
-                    <p className="font-[700] text-[18px] leading-[27px] text-[#fff] mb-0 text-ellipsis">
-                      12910 - Thăng Long
-                    </p>
-                  </div>
-
-                  <div className=" pl-[58px] pr-[15px]">
-                    <div className="text-[#fff] text-[14px] leading-[21px]">
-                      Nơi nhận
-                    </div>
-                    <p className="font-[700] text-[18px] leading-[27px] text-[#fff] mb-0 text-ellipsis">
-                      20 - Quảng Ninh
-                    </p>
-                  </div>
-                </div> */}
-                                </div>
-
-                                <div>
-                                    <div className="mb-[35px]">
-                                        <h3 className="font-[700] text-[20px] leading-6 text-[#0072bc]">
-                                            THÔNG TIN TRẠNG THÁI
-                                        </h3>
-                                    </div>
-                                    <div className="block w-full overflow-x-auto">
-                                        <table class="table w-full border-collapse rounded-md text-center mr-[3px] mb-4">
-                                            <thead className="bg-[#0072bc]">
-                                                <tr>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Ngày
-                                                    </th>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Giờ
-                                                    </th>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center ">
-                                                        Trạng thái
-                                                    </th>
-                                                    <th class="p-[20px] border solid border-[#fff] leading-[30px] text-[18px] font-[700] text-[#fff] text-center">
-                                                        Vị trí
-                                                    </th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {moment(
-                                                            infoOrder[0]
-                                                                .updatedAt,
-                                                        ).format("l")}
-                                                    </td>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {moment(
-                                                            infoOrder[0]
-                                                                .updatedAt,
-                                                        ).format("LT")}
-                                                    </td>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {
-                                                            infoOrder[0]
-                                                                .orderStatus
-                                                        }
-                                                    </td>
-                                                    <td class="p-[20px] border-[2px] border-dashed border-[#ddd]">
-                                                        {
-                                                            infoOrder[0]
-                                                                .orderLocation
-                                                        }
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
+                                    <div className="px-[23px] py-[24px] bg-[#fafafa]">
+                                        <div>
+                                            {routeLink ? (
+                                                <a href={routeLink} target="_blank" rel="noopener noreferrer">
+                                                    Xem lộ trình đường đi
+                                                </a>
+                                            ) : (
+                                                <p>Đang lấy lộ trình...</p>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -309,6 +198,4 @@ const PostalLookupPage = () => {
     );
 };
 
-//ET051174907VN
-//EU103280832VN
 export default PostalLookupPage;
