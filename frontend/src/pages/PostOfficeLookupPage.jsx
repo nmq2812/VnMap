@@ -65,14 +65,6 @@ const PostOfficeLookupPage = () => {
             });
     };
 
-    const handleSearchCoords = (pointItem) => {
-        window.open(
-            `https://nominatim.openstreetmap.org/search?q=${pointItem.pointAddress}`,
-            "_blank",
-            "width=800,height=600,scrollbars=yes,resizable=yes",
-        );
-    };
-
     return (
         <div>
             <Header />
@@ -148,12 +140,12 @@ const PostOfficeLookupPage = () => {
                                     allPointInCity.map((pointItem) => (
                                         <div
                                             key={pointItem._id}
-                                            className="overflow-auto max-h-[624px]"
-                                            onClick={handleSearchCoords(
-                                                pointItem,
-                                            )}
+                                            className="max-h-[624px]"
                                         >
-                                            <div className="p-[21px] bg-[#fff] border-b-[1px] solid border-b-[#0054a6] cursor-pointer">
+                                            <a
+                                                href={routeLink}
+                                                className="p-[21px] solid"
+                                            >
                                                 <div className="flex items-center mb-[10px]">
                                                     <h3 className="font-[500] text-[18px] leading-[24px] mb-0 ml-2">
                                                         {pointItem.pointName}
@@ -164,23 +156,9 @@ const PostOfficeLookupPage = () => {
                                                         {pointItem.pointAddress}
                                                     </p>
                                                 </div>
-                                            </div>
+                                            </a>
                                         </div>
                                     ))}
-
-                                {routeLink && (
-                                    <div className="mt-4">
-                                        <a
-                                            href={routeLink}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="text-blue-500 underline"
-                                        >
-                                            Xem đường đi từ vị trí hiện tại đến
-                                            bưu cục
-                                        </a>
-                                    </div>
-                                )}
                             </div>
                         </div>
                     </section>

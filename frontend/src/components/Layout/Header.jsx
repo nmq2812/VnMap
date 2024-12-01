@@ -5,8 +5,15 @@ import { useSelector } from "react-redux";
 
 const Header = () => {
     const [openMenu, setOpenMenu] = useState(false);
+    const [userName, setUserName] = useState(localStorage.getItem("userName"));
     const userLogin = useSelector((state) => state.userLogin);
-    const { userInfo } = userLogin;
+    const { error, loading, userInfo } = userLogin;
+    console.log(userInfo);
+
+    if (userInfo == null && localStorage.getItem("UserInfo") != null) {
+        console.log(userInfo);
+        setOpenMenu(!openMenu);
+    }
 
     return (
         <>
@@ -25,7 +32,7 @@ const Header = () => {
                                 href="./login"
                                 class="text-white bg-[#f7941e] hover:bg-[#fab35c] focus:ring-4 focus:ring-yellow-300 font-semibold rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-3 sm:mr-2 lg:mr-0 "
                             >
-                                {!userInfo ? "Đăng nhập" : userInfo.userName}
+                                {!userName ? "Đăng nhập" : userName}
                             </a>
                             <button
                                 type="button"

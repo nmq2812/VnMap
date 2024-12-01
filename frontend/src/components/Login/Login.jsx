@@ -7,14 +7,15 @@ import { login } from "../../Redux/Actions/userActions";
 import Loading from "../../LoadingError/Loading";
 import Message from "../../LoadingError/Error";
 const Login = () => {
+    // const [userRole, setUserRole] = useState("null");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [visible, setVisible] = useState(false);
     const navigate = useNavigate();
-
+    const dispatch = useDispatch();
     const userLogin = useSelector((state) => state.userLogin);
     const { error, loading, userInfo } = userLogin;
-    const dispatch = useDispatch();
+
     useEffect(() => {
         if (userInfo) {
             if (
@@ -32,10 +33,12 @@ const Login = () => {
             }
         }
     }, [userInfo, navigate]);
+
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const handleLogin = dispatch(login(email, password));
-        if (handleLogin) {
+        const isLogin = dispatch(login(email, password));
+        console.log(userInfo);
+        if (isLogin) {
             navigate("/");
         }
     };
@@ -51,12 +54,12 @@ const Login = () => {
                     </h1>
                     <p className="text-white mt-1">Welcome to my app!!!</p>
                     <div className="flex justify-center lg:justify-start mt-6">
-                        <Link
-                            to="/"
+                        <a
+                            href="/"
                             className="hover:bg-[#0072bc] hover:text-white hover:-translate-y-1 transition-all duration-500 bg-white text-[#0072bc] mt-4 px-4 py-2 rounded-2xl font-bold mb-2"
                         >
                             Go to app
-                        </Link>
+                        </a>
                     </div>
                 </div>
             </div>

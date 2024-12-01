@@ -41,6 +41,7 @@ export const login = (email, password) => async (dispatch) => {
         dispatch({ type: USER_LOGIN_SUCCESS, payload: data });
         toast.success("Đăng nhập thành công!!");
         localStorage.setItem("userInfo", JSON.stringify(data));
+        localStorage.setItem("userName", JSON.stringify(data.userName));
         return true;
     } catch (error) {
         dispatch({
@@ -59,6 +60,7 @@ export const login = (email, password) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
     try {
         localStorage.removeItem("userInfo");
+        localStorage.removeItem("userName");
         dispatch({ type: USER_LOGOUT });
         dispatch({ type: USER_DETAILS_RESET });
         dispatch({ type: ORDER_LIST_MY_RESET });
