@@ -5,6 +5,7 @@ import { BiLinkExternal } from "react-icons/bi";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import { State } from "country-state-city";
 import axios from "axios";
 const UpdateStatusPage = () => {
     const params = useParams();
@@ -233,14 +234,14 @@ const UpdateStatusPage = () => {
 
                                                     <div className="mx-0 mb-[10px] text-[#31708f]">
                                                         <label className="pt-[8px] mb-0 inline-block max-w-[100%] font-bold text-[13px] leading-[1.48]">
-                                                            Quận/Huyện và
                                                             Tỉnh/TP
                                                             <span className="text-[#a94442]">
                                                                 *
                                                             </span>
                                                         </label>
-                                                        <input
-                                                            type="text"
+                                                        <select
+                                                            name=""
+                                                            id=""
                                                             value={
                                                                 senderProvince
                                                             }
@@ -250,9 +251,26 @@ const UpdateStatusPage = () => {
                                                                         .value,
                                                                 )
                                                             }
-                                                            placeholder="VD: Tiền Hải, Thái Bình"
-                                                            className="transition-all leading-[30px] w-full h-[34px] pt-[6px] pb-[7px] px-[12px] block text-[14px] bg-white border border-solid border-[#dde2e8] shadow-sm"
-                                                        />
+                                                            className="w-[100%] border h-[40px] rounded-[5px]"
+                                                        >
+                                                            <option value="">
+                                                                Chọn Tỉnh/TP
+                                                            </option>
+                                                            {State.getStatesOfCountry(
+                                                                "VN",
+                                                            ).map((item) => (
+                                                                <option
+                                                                    key={
+                                                                        item.isoCode
+                                                                    }
+                                                                    value={
+                                                                        item.isoCode
+                                                                    }
+                                                                >
+                                                                    {item.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </div>
 
                                                     <div className="mx-0 mb-[10px] text-[#31708f]">
@@ -343,14 +361,14 @@ const UpdateStatusPage = () => {
 
                                                     <div className="mx-0 mb-[10px] text-[#31708f]">
                                                         <label className="pt-[8px] mb-0 inline-block max-w-[100%] font-bold text-[13px] leading-[1.48]">
-                                                            Quận/Huyện và
                                                             Tỉnh/TP
                                                             <span className="text-[#a94442]">
                                                                 *
                                                             </span>
                                                         </label>
-                                                        <input
-                                                            type="text"
+                                                        <select
+                                                            name=""
+                                                            id=""
                                                             value={
                                                                 recipientProvince
                                                             }
@@ -360,9 +378,26 @@ const UpdateStatusPage = () => {
                                                                         .value,
                                                                 )
                                                             }
-                                                            placeholder="VD: Tiền Hải, Thái Bình"
-                                                            className="transition-all leading-[30px] w-full h-[34px] pt-[6px] pb-[7px] px-[12px] block text-[14px] bg-white border border-solid border-[#dde2e8] shadow-sm"
-                                                        />
+                                                            className="w-[100%] border h-[40px] rounded-[5px]"
+                                                        >
+                                                            <option value="">
+                                                                Chọn Tỉnh/TP
+                                                            </option>
+                                                            {State.getStatesOfCountry(
+                                                                "VN",
+                                                            ).map((item) => (
+                                                                <option
+                                                                    key={
+                                                                        item.isoCode
+                                                                    }
+                                                                    value={
+                                                                        item.isoCode
+                                                                    }
+                                                                >
+                                                                    {item.name}
+                                                                </option>
+                                                            ))}
+                                                        </select>
                                                     </div>
 
                                                     <div className="mx-0 mb-[10px] text-[#31708f]">
