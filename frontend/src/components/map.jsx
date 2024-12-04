@@ -11,13 +11,14 @@ import polyline from "@mapbox/polyline";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility";
 
-const RouteMap = (mapLink) => {
+const RouteMap = (param) => {
     const [routeData, setRouteData] = useState(null);
 
     useEffect(() => {
         // Gọi API bằng axios
         const fetchRoute = async () => {
-            const url = mapLink;
+            const url = param.mapUrl;
+            console.log(typeof url, url);
             try {
                 const response = await axios.get(url); // Sử dụng axios để gọi API
                 setRouteData(response.data.paths[0]); // Lưu tuyến đường vào state
@@ -43,11 +44,11 @@ const RouteMap = (mapLink) => {
     return (
         <MapContainer
             center={startPoint}
-            zoom={10}
+            zoom={5}
             style={{ height: "500px", width: "100%" }}
         >
             {/* Layer bản đồ */}
-            <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+            <TileLayer url="https://tmdt.fimo.edu.vn/hot/{z}/{x}/{y}.png" />
 
             {/* Vẽ tuyến đường */}
             <Polyline positions={polylinePositions} color="blue" weight={4} />

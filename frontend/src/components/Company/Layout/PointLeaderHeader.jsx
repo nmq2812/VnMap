@@ -85,14 +85,14 @@ const PointLeaderHeader = () => {
                                             Thống kê hàng
                                         </a>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a
                                             href="/pointleader/tao-tai-khoan-nhan-vien"
                                             class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-[#f7941e] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0072bc] lg:p-0"
                                         >
                                             Tạo tài khoản nhân viên
                                         </a>
-                                    </li>
+                                    </li> */}
                                     <li>
                                         <a
                                             href="/pointleader/quan-ly-nhan-vien"
@@ -118,14 +118,14 @@ const PointLeaderHeader = () => {
                                             Thống kê hàng
                                         </a>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a
                                             href="/pointleader/tao-tai-khoan-nhan-vien"
                                             class="block py-2 pl-3 pr-4 text-white border-b border-gray-100 hover:bg-[#f7941e] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#f7941e] lg:p-0 "
                                         >
                                             Tạo tài khoản nhân viên
                                         </a>
-                                    </li>
+                                    </li> */}
                                     <li>
                                         <a
                                             href="/pointleader/quan-ly-nhan-vien"

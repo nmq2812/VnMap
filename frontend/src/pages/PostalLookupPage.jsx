@@ -36,7 +36,7 @@ const PostalLookupPage = () => {
                 console.log(senderCoords, recipientCoords);
 
                 if (senderCoords && recipientCoords) {
-                    const link = `https://tmdt.fimo.edu.vn/maps/route?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck&layer=OpenStreetMap`;
+                    const link = `https://tmdt.fimo.edu.vn/route?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck`;
                     //const link = `https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=${senderCoords.lat}%2C${senderCoords.lon}%3B${recipientCoords.lat}%2C${recipientCoords.lon}`;
 
                     setRouteLink(link);
@@ -203,20 +203,13 @@ const PostalLookupPage = () => {
                                     </div>
 
                                     <div className="px-[23px] py-[24px] bg-[#fafafa]">
-                                        {/* <div>
+                                        <div>
                                             {routeLink ? (
-                                                <a
-                                                    href={routeLink}
-                                                    target="_blank"
-                                                    rel="noopener noreferrer"
-                                                >
-                                                    Xem lộ trình đường đi
-                                                </a>
+                                                <RouteMap mapUrl={routeLink} />
                                             ) : (
-                                                <p>Đang lấy lộ trình...</p>
+                                                <p></p>
                                             )}
-                                        </div> */}
-                                        <RouteMap mapLink={routeLink} />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
