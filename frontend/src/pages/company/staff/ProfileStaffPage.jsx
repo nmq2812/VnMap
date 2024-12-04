@@ -60,7 +60,7 @@ const ProfileStaffPage = () => {
     };
 
     const handleLogOut = async () => {
-        navigate("/login");
+        navigate("/");
         dispatch(logout());
     };
 

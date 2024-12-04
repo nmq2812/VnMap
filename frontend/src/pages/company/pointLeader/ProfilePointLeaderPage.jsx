@@ -64,7 +64,7 @@ const ProfilePointLeaderPage = () => {
     };
 
     const handleLogOut = async () => {
-        navigate("/login");
+        navigate("/");
         dispatch(logout());
     };
     return (
