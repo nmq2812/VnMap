@@ -82,10 +82,10 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <a
-                                            href="/tra-cuu-buu-gui"
+                                            href="/tra-cuu-don-gui"
                                             class="block py-2 pl-3 pr-4 text-black border-b border-gray-100 hover:bg-[#f7941e] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0072bc] lg:p-0"
                                         >
-                                            Tra cứu bưu gửi
+                                            Tra cứu đơn gửi
                                         </a>
                                     </li>
                                     <li>
@@ -131,10 +131,10 @@ const Header = () => {
                                     </li>
                                     <li>
                                         <a
-                                            href="/tra-cuu-buu-gui"
+                                            href="/tra-cuu-don-gui"
                                             class="block py-2 pl-3 pr-4 text-black border-b border-gray-100 hover:bg-[#f7941e] lg:hover:bg-transparent lg:border-0 lg:hover:text-[#0072bc] lg:p-0 "
                                         >
-                                            Tra cứu bưu gửi
+                                            Tra cứu đơn gửi
                                         </a>
                                     </li>
                                     <li>

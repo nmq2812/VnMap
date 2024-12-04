@@ -4,6 +4,7 @@ import Footer from "../components/Layout/Footer";
 import moment from "moment";
 import { toast } from "react-toastify";
 import axios from "axios";
+import RouteMap from "../components/map";
 
 // Function to fetch coordinates from the API
 async function fetchCoordinates(location) {
@@ -35,8 +36,8 @@ const PostalLookupPage = () => {
                 console.log(senderCoords, recipientCoords);
 
                 if (senderCoords && recipientCoords) {
-                    //const link = `https://tmdt.fimo.edu.vn/maps/route?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck&layer=OpenStreetMap`;
-                    const link = `https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=${senderCoords.lat}%2C${senderCoords.lon}%3B${recipientCoords.lat}%2C${recipientCoords.lon}`;
+                    const link = `https://tmdt.fimo.edu.vn/maps/route?point=${senderCoords.lat}%2C${senderCoords.lon}&point=${recipientCoords.lat}%2C${recipientCoords.lon}&profile=truck&layer=OpenStreetMap`;
+                    //const link = `https://www.openstreetmap.org/directions?engine=graphhopper_foot&route=${senderCoords.lat}%2C${senderCoords.lon}%3B${recipientCoords.lat}%2C${recipientCoords.lon}`;
 
                     setRouteLink(link);
                 }
@@ -74,7 +75,7 @@ const PostalLookupPage = () => {
                 <div>
                     <div className="max-w-screen-xl px-4 pt-8 mx-auto lg:space-y-20 lg:px-6">
                         <span className="text-[#f7941e] text-4xl items-center lg:font-[500] lg:text-[45px] lg:leading-[55px]">
-                            TRA CỨU BƯU GỬI
+                            TRA CỨU ĐƠN GỬI
                         </span>
                     </div>
                     <section className="bg-white">
@@ -86,7 +87,7 @@ const PostalLookupPage = () => {
                                         src="https://ems.com.vn/img/icon/order-search.png"
                                         alt=""
                                     />
-                                    <div>Mã bưu gửi (VD: EB125966888VN)</div>
+                                    <div>Mã đơn gửi (VD: EB125966888VN)</div>
                                 </div>
                                 <div>
                                     <form onSubmit={handleSubmit}>
@@ -114,7 +115,7 @@ const PostalLookupPage = () => {
                                             </div>
                                             <div className="mt-[20px] text-[14px] pl-[15px]">
                                                 <i>
-                                                    Ghi chú: Nhập đúng mã bưu
+                                                    Ghi chú: Nhập đúng mã đơn
                                                     gửi để tra cứu thành công
                                                 </i>
                                             </div>
@@ -202,7 +203,7 @@ const PostalLookupPage = () => {
                                     </div>
 
                                     <div className="px-[23px] py-[24px] bg-[#fafafa]">
-                                        <div>
+                                        {/* <div>
                                             {routeLink ? (
                                                 <a
                                                     href={routeLink}
@@ -214,7 +215,8 @@ const PostalLookupPage = () => {
                                             ) : (
                                                 <p>Đang lấy lộ trình...</p>
                                             )}
-                                        </div>
+                                        </div> */}
+                                        <RouteMap mapLink={routeLink} />
                                     </div>
                                 </div>
                             </div>

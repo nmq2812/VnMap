@@ -3,6 +3,7 @@ import StaffHeader from "../../../components/Company/Layout/StaffHeader.jsx";
 import { FaPencilAlt } from "react-icons/fa";
 import { BiLinkExternal } from "react-icons/bi";
 import { toast } from "react-toastify";
+import { State } from "country-state-city";
 
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
@@ -107,6 +108,7 @@ const CreatePostalItemPage = () => {
                 setTimeout(() => {
                     window.location.reload();
                 }, 2000);
+                navigate(-1);
             })
             .catch((error) => {
                 toast.error("Tạo đơn hàng không thành công!!");
@@ -201,22 +203,36 @@ const CreatePostalItemPage = () => {
 
                                             <div className="mx-0 mb-[10px] text-[#31708f]">
                                                 <label className="pt-[8px] mb-0 inline-block max-w-[100%] font-bold text-[13px] leading-[1.48]">
-                                                    Quận/Huyện và Tỉnh/TP
+                                                    Tỉnh/TP
                                                     <span className="text-[#a94442]">
                                                         *
                                                     </span>
                                                 </label>
-                                                <input
-                                                    type="text"
-                                                    placeholder="VD: Tiền Hải, Thái Bình"
+                                                <select
+                                                    name=""
+                                                    id=""
                                                     value={senderProvince}
                                                     onChange={(e) =>
                                                         setSenderProvince(
                                                             e.target.value,
                                                         )
                                                     }
-                                                    className="transition-all leading-[30px] w-full h-[34px] pt-[6px] pb-[7px] px-[12px] block text-[14px] bg-white border border-solid border-[#dde2e8] shadow-sm"
-                                                />
+                                                    className="w-[100%] border h-[40px] rounded-[5px]"
+                                                >
+                                                    <option value="">
+                                                        Chọn Tỉnh/TP
+                                                    </option>
+                                                    {State.getStatesOfCountry(
+                                                        "VN",
+                                                    ).map((item) => (
+                                                        <option
+                                                            key={item.isoCode}
+                                                            value={item.isoCode}
+                                                        >
+                                                            {item.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
 
                                             <div className="mx-0 mb-[10px] text-[#31708f]">
@@ -300,22 +316,36 @@ const CreatePostalItemPage = () => {
 
                                             <div className="mx-0 mb-[10px] text-[#31708f]">
                                                 <label className="pt-[8px] mb-0 inline-block max-w-[100%] font-bold text-[13px] leading-[1.48]">
-                                                    Quận/Huyện và Tỉnh/TP
+                                                    Tỉnh/TP
                                                     <span className="text-[#a94442]">
                                                         *
                                                     </span>
                                                 </label>
-                                                <input
-                                                    type="text"
-                                                    placeholder="VD: Tiền Hải, Thái Bình"
+                                                <select
+                                                    name=""
+                                                    id=""
                                                     value={recipientProvince}
                                                     onChange={(e) =>
                                                         setRecipientProvince(
                                                             e.target.value,
                                                         )
                                                     }
-                                                    className="transition-all leading-[30px] w-full h-[34px] pt-[6px] pb-[7px] px-[12px] block text-[14px] bg-white border border-solid border-[#dde2e8] shadow-sm"
-                                                />
+                                                    className="w-[100%] border h-[40px] rounded-[5px]"
+                                                >
+                                                    <option value="">
+                                                        Chọn Tỉnh/TP
+                                                    </option>
+                                                    {State.getStatesOfCountry(
+                                                        "VN",
+                                                    ).map((item) => (
+                                                        <option
+                                                            key={item.isoCode}
+                                                            value={item.isoCode}
+                                                        >
+                                                            {item.name}
+                                                        </option>
+                                                    ))}
+                                                </select>
                                             </div>
 
                                             <div className="mx-0 mb-[10px] text-[#31708f]">
